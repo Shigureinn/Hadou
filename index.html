@@ -55,8 +55,8 @@
 	<div id="content" class="hidden">
 	    <h1>計算</h1>
 	<!-- ini_gaugeの入力と増減ボタン -->
-	<label for="出陣時ゲージ">Initial Gauge:</label>
-	<input type="number" id="ini_gauge" step="0.1" value="0">
+	<label for="出陣時ゲージ">出陣時ゲージ (%):</label>
+	<input type="number" id="ini_gauge" step="0.1" value="0"><br>
 	<button onclick="adjustIniGauge(-5)">-5</button>
 	<button onclick="adjustIniGauge(-1)">-1</button>
 	<button onclick="adjustIniGauge(-0.5)">-0.5</button>
@@ -64,17 +64,8 @@
 	<button onclick="adjustIniGauge(1)">+1</button>
 	<button onclick="adjustIniGauge(5)">+5</button><br><br>
 	    
-	    <label for="ini_gauge">出陣時ゲージ上昇量 (%): </label>
-	    <input type="number" id="ini_gauge"><br><br>
-	    
 	    <label for="rise_speed">戦法速度上昇UP(%): </label>
 	    <input type="number" id="rise_speed" readonly><br><br>
-	    
-	    <label>時間 (t): </label><br>
-	    <button class="time-button" onclick="setTime(15, this)">15</button>
-	    <button class="time-button" onclick="setTime(20, this)">20</button>
-	    <button class="time-button" onclick="setTime(25, this)">25</button>
-	    <button class="time-button" onclick="setTime(30, this)">30</button><br><br>
 
 	    <label>上昇速度を選択: </label><br>
 	    <button class="speed-button" data-speed="2" data-prefix="敏活1" onclick="setSpeed(this)">敏活1</button>
@@ -99,8 +90,18 @@
 	    <button class="speed-button" data-speed="15" data-prefix="狼顧(25%)" onclick="setSpeed(this)">狼顧(25%)</button><br>
 	    <button class="speed-button" data-speed="2" data-prefix="秘計" onclick="setSpeed(this)">秘計</button>
 	    <button class="speed-button" data-speed="4" data-prefix="鳳雛" onclick="setSpeed(this)">鳳雛</button>
-	    <button class="speed-button" data-speed="2" data-prefix="清鑑" onclick="setSpeed(this)">清鑑</button><br><br>
-	    
+	    <button class="speed-button" data-speed="2" data-prefix="清鑑" onclick="setSpeed(this)">清鑑</button><br>
+	    <button class="speed-button" data-speed="1" data-prefix="+1%" onclick="setSpeed(this)">+1%</button>
+	    <button class="speed-button" data-speed="2" data-prefix="+2%" onclick="setSpeed(this)">+2%</button>
+	    <button class="speed-button" data-speed="3" data-prefix="+3%" onclick="setSpeed(this)">+3%</button>
+	    <button class="speed-button" data-speed="2" data-prefix="+4%" onclick="setSpeed(this)">+4%</button>
+	    <button class="speed-button" data-speed="3" data-prefix="+5%" onclick="setSpeed(this)">+5%</button><br><br>
+
+	    <label>時間 (t): </label><br>
+	    <button class="time-button" onclick="setTime(15, this)">15</button>
+	    <button class="time-button" onclick="setTime(20, this)">20</button>
+	    <button class="time-button" onclick="setTime(25, this)">25</button>
+	    <button class="time-button" onclick="setTime(30, this)">30</button><br><br>	    
 	    <button onclick="calculate()">計算する</button>
 	    
 	    <h2>結果: <span id="result"></span></h2>

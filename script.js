@@ -70,6 +70,21 @@ function setSpeed(button) {
     let totalSpeed = selectedSpeedButtons.reduce((sum, btn) => sum + parseFloat(btn.getAttribute('data-speed')), 0);
     document.getElementById('rise_speed').value = totalSpeed;
 }
+function adjustIniGauge(amount) {
+    const iniGaugeInput = document.getElementById('ini_gauge');
+    let currentValue = parseFloat(iniGaugeInput.value);
+
+    // ini_gaugeが未入力の場合は0として扱う
+    if (isNaN(currentValue)) {
+        currentValue = 0;
+    }
+
+    // ini_gaugeを増減
+    currentValue += amount;
+
+    // ini_gaugeの値を更新
+    iniGaugeInput.value = currentValue;
+}
 
 function calculate() {
     // 入力フィールドから値を取得

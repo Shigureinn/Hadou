@@ -1,3 +1,17 @@
+const correctPassword = "Edelgard"; // ここに設定するパスワードを入力
+
+function checkPassword() {
+    const input = document.getElementById('passwordInput').value;
+    const errorMessage = document.getElementById('error-message');
+    if (input === correctPassword) {
+        document.getElementById('passwordModal').style.display = 'none';
+        document.getElementById('content').classList.remove('hidden');
+    } else {
+        errorMessage.textContent = 'パスワードが間違っています。';
+    }
+}
+
+
 let selectedTime = 0;
 let history = [];
 let previousTimeButton = null;

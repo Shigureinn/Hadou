@@ -1,9 +1,18 @@
 const correctPassword = "Edelgard"; // ここに設定するパスワードを入力
 
+document.addEventListener("DOMContentLoaded", () => {
+    // ページが読み込まれたときにセッションストレージをチェック
+    if (sessionStorage.getItem('authenticated') === 'true') {
+        document.getElementById('passwordModal').style.display = 'none';
+        document.getElementById('content').classList.remove('hidden');
+    }
+});
+
 function checkPassword() {
     const input = document.getElementById('passwordInput').value;
     const errorMessage = document.getElementById('error-message');
     if (input === correctPassword) {
+        sessionStorage.setItem('authenticated', 'true'); // 認証状態をセッションに保存
         document.getElementById('passwordModal').style.display = 'none';
         document.getElementById('content').classList.remove('hidden');
     } else {
@@ -67,6 +76,11 @@ function calculate() {
     let iniGauge = parseFloat(document.getElementById('ini_gauge').value);
     let riseSpeed = parseFloat(document.getElementById('rise_speed').value);
 
+    // ini_gaugeが未入力の場合は0として扱う
+    if (isNaN(iniGauge)) {
+        iniGauge = 0;
+    }
+    
     if (selectedTime === 0) {
         alert('時間を選択してください。');
         return;

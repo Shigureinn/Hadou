@@ -18,44 +18,87 @@
         .time-button.selected, .speed-button.selected {
             background-color: #add8e6; /* 選択されたときの色 */
         }
+        .hidden {
+    display: none;
+}
+	.modal {
+	    display: block;
+	    position: fixed;
+	    z-index: 1;
+	    left: 0;
+	    top: 0;
+	    width: 100%;
+	    height: 100%;
+	    overflow: auto;
+	    background-color: rgba(0, 0, 0, 0.4);
+	}
+	.modal-content {
+	    background-color: #fefefe;
+	    margin: 15% auto;
+	    padding: 20px;
+	    border: 1px solid #888;
+	    width: 80%;
+	    max-width: 300px;
+	    text-align: center;
+	}
     </style>
 </head>
 <body>
-    <h1>計算プログラム</h1>
-    
-    <label for="ini_gauge">出場時ゲージ上昇量 (%): </label>
-    <input type="number" id="ini_gauge"><br><br>
-    
-    <label for="rise_speed">戦法速度上昇UP(%): </label>
-    <input type="number" id="rise_speed" readonly><br><br>
-    
-    <label>時間 (t): </label><br>
-    <button class="time-button" onclick="setTime(15, this)">15</button>
-    <button class="time-button" onclick="setTime(20, this)">20</button>
-    <button class="time-button" onclick="setTime(25, this)">25</button>
-    <button class="time-button" onclick="setTime(30, this)">30</button><br><br>
+    <div id="passwordModal" class="modal">
+        <div class="modal-content">
+            <h2>パスワードを入力してください</h2>
+            <input type="password" id="passwordInput"><br><br>
+            <button onclick="checkPassword()">送信</button>
+            <p id="error-message" style="color: red;"></p>
+        </div>
+    </div>
+	<div id="content" class="hidden">
+	    <h1>計算</h1>
+	    
+	    <label for="ini_gauge">出陣時ゲージ上昇量 (%): </label>
+	    <input type="number" id="ini_gauge"><br><br>
+	    
+	    <label for="rise_speed">戦法速度上昇UP(%): </label>
+	    <input type="number" id="rise_speed" readonly><br><br>
+	    
+	    <label>時間 (t): </label><br>
+	    <button class="time-button" onclick="setTime(15, this)">15</button>
+	    <button class="time-button" onclick="setTime(20, this)">20</button>
+	    <button class="time-button" onclick="setTime(25, this)">25</button>
+	    <button class="time-button" onclick="setTime(30, this)">30</button><br><br>
 
-    <label>上昇速度を選択: </label><br>
-    <button class="speed-button" data-speed="2" data-prefix="敏活1" onclick="setSpeed(this)">敏活1</button>
-    <button class="speed-button" data-speed="4" data-prefix="敏活2" onclick="setSpeed(this)">敏活2</button>
-    <button class="speed-button" data-speed="7" data-prefix="敏活3" onclick="setSpeed(this)">敏活3</button>
-    <button class="speed-button" data-speed="10" data-prefix="敏活4" onclick="setSpeed(this)">敏活4</button>
-    <button class="speed-button" data-speed="15" data-prefix="敏活5" onclick="setSpeed(this)">敏活5</button><br>
-     <button class="speed-button" data-speed="2" data-prefix="羌敏活1" onclick="setSpeed(this)">羌敏活1</button>
-    <button class="speed-button" data-speed="4" data-prefix="羌敏活2" onclick="setSpeed(this)">羌敏活2</button>
-    <button class="speed-button" data-speed="7" data-prefix="羌敏活3" onclick="setSpeed(this)">羌敏活3</button>
-    <button class="speed-button" data-speed="10" data-prefix="羌敏活4" onclick="setSpeed(this)">羌敏活4</button>
-    <button class="speed-button" data-speed="15" data-prefix="羌敏活5" onclick="setSpeed(this)">羌敏活5</button><br>
-    <button class="speed-button" data-speed="2" data-prefix="秘計" onclick="setSpeed(this)">秘計</button>
-    <button class="speed-button" data-speed="4" data-prefix="鳳雛" onclick="setSpeed(this)">鳳雛</button>
-    <button class="speed-button" data-speed="2" data-prefix="清鑑" onclick="setSpeed(this)">清鑑</button><br><br>
-    
-    <button onclick="calculate()">計算する</button>
-    
-    <h2>結果: <span id="result"></span></h2>
-    
-    <h3>計算履歴</h3>
-    <div id="history"></div>
+	    <label>上昇速度を選択: </label><br>
+	    <button class="speed-button" data-speed="2" data-prefix="敏活1" onclick="setSpeed(this)">敏活1</button>
+	    <button class="speed-button" data-speed="4" data-prefix="敏活2" onclick="setSpeed(this)">敏活2</button>
+	    <button class="speed-button" data-speed="7" data-prefix="敏活3" onclick="setSpeed(this)">敏活3</button>
+	    <button class="speed-button" data-speed="10" data-prefix="敏活4" onclick="setSpeed(this)">敏活4</button>
+	    <button class="speed-button" data-speed="15" data-prefix="敏活5" onclick="setSpeed(this)">敏活5</button><br>
+	    <button class="speed-button" data-speed="2" data-prefix="羌敏活1" onclick="setSpeed(this)">羌敏活1</button>
+	    <button class="speed-button" data-speed="4" data-prefix="羌敏活2" onclick="setSpeed(this)">羌敏活2</button>
+	    <button class="speed-button" data-speed="7" data-prefix="羌敏活3" onclick="setSpeed(this)">羌敏活3</button>
+	    <button class="speed-button" data-speed="10" data-prefix="羌敏活4" onclick="setSpeed(this)">羌敏活4</button>
+	    <button class="speed-button" data-speed="15" data-prefix="羌敏活5" onclick="setSpeed(this)">羌敏活5</button><br>
+	    <button class="speed-button" data-speed="2" data-prefix="和韻(2%)" onclick="setSpeed(this)">和韻(2%)</button>
+	    <button class="speed-button" data-speed="4" data-prefix="和韻(4%)" onclick="setSpeed(this)">和韻(4%)</button>
+	    <button class="speed-button" data-speed="6" data-prefix="和韻(6%)" onclick="setSpeed(this)">和韻(6%)</button>
+	    <button class="speed-button" data-speed="8" data-prefix="和韻(8%)" onclick="setSpeed(this)">和韻(8%)</button>
+	    <button class="speed-button" data-speed="10" data-prefix="和韻(10%)" onclick="setSpeed(this)">和韻(10%)</button><br>
+	    <button class="speed-button" data-speed="2" data-prefix="狼顧(5%)" onclick="setSpeed(this)">狼顧(5%)</button>
+	    <button class="speed-button" data-speed="4" data-prefix="狼顧(10%)" onclick="setSpeed(this)">狼顧(10%)</button>
+	    <button class="speed-button" data-speed="7" data-prefix="狼顧(15%)" onclick="setSpeed(this)">羌狼顧(15%)</button>
+	    <button class="speed-button" data-speed="10" data-prefix="狼顧(20%)" onclick="setSpeed(this)">狼顧(20%)</button>
+	    <button class="speed-button" data-speed="15" data-prefix="狼顧(25%)" onclick="setSpeed(this)">狼顧(25%)</button><br>
+	    <button class="speed-button" data-speed="2" data-prefix="秘計" onclick="setSpeed(this)">秘計</button>
+	    <button class="speed-button" data-speed="4" data-prefix="鳳雛" onclick="setSpeed(this)">鳳雛</button>
+	    <button class="speed-button" data-speed="2" data-prefix="清鑑" onclick="setSpeed(this)">清鑑</button><br><br>
+	    
+	    <button onclick="calculate()">計算する</button>
+	    
+	    <h2>結果: <span id="result"></span></h2>
+	    
+	    <h3>計算履歴</h3>
+	    <div id="history"></div>
+    </div>
     
     <script src="script.js"></script>
 </body>

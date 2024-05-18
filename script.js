@@ -69,6 +69,7 @@ function setSpeed(button) {
     // riseSpeedの計算
     let totalSpeed = selectedSpeedButtons.reduce((sum, btn) => sum + parseFloat(btn.getAttribute('data-speed')), 0);
     document.getElementById('rise_speed').value = totalSpeed;
+
 }
 function adjustIniGauge(amount) {
     const iniGaugeInput = document.getElementById('ini_gauge');
@@ -94,6 +95,11 @@ function calculate() {
     // ini_gaugeが未入力の場合は0として扱う
     if (isNaN(iniGauge)) {
         iniGauge = 0;
+    }
+
+   // riseSpeedが未入力の場合は0として扱う
+    if (isNaN(riseSpeed)) {
+        riseSpeed = 0;
     }
     
     if (selectedTime === 0) {

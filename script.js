@@ -1,4 +1,4 @@
-const correctPassword = "Edelgard"; // ここに設定するパスワードを入力
+const correctPassword = ""; // ここに設定するパスワードを入力
 
 document.addEventListener("DOMContentLoaded", () => {
     // ページが読み込まれたときにセッションストレージをチェック
